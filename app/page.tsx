@@ -1,7 +1,7 @@
 import PageHeader from '@/components/Header/PageHeader'
 import HeroSection from '@/components/Hero/HeroSection'
-import InstagramFeed from '@/components/InstagramFeed/InstagramFeed'
 import ContactForm from '@/components/ContactForm/ContactForm'
+import InstagramFeed from '@/components/InstagramFeed/InstagramFeed'
 import PageFooter from '@/components/Footer/PageFooter'
 
 export default function Home() {
@@ -9,8 +9,8 @@ export default function Home() {
     <>
       <PageHeader />
       <HeroSection />
-      <InstagramFeed />
       <ContactForm />
+      <InstagramFeed />
       <PageFooter />
     </>
   )
