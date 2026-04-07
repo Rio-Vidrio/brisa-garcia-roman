@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: #111111;
+      -webkit-font-smoothing: antialiased;
+      background: #fff;
+    }
+
+    :root {
+      --red: #C8202A;
+      --red-dark: #a01820;
+    }
+
+    /* ── Contact section ── */
+    .contact-section { background: #fff; padding: 60px 2rem; }
+
+    .contact-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 56px;
+      align-items: start;
+    }
+
+    /* Left info panel */
+    .section-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--red);
+      font-weight: 600;
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    .contact-info h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 700;
+      color: #111;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      margin-top: 8px;
+    }
+
+    .contact-info p {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      color: #777;
+      line-height: 1.75;
+      margin-bottom: 28px;
+    }
+
+    .contact-detail {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #444;
+      text-decoration: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      margin-bottom: 14px;
+      transition: color 0.18s;
+    }
+    .contact-detail:hover { color: var(--red); }
+
+    .accent-bar { width: 48px; height: 3px; background: var(--red); border-radius: 2px; margin-top: 8px; }
+
+    /* Form card */
+    .form-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.09);
+      border: 1px solid #F0F0F0;
+      padding: clamp(24px, 5vw, 48px);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .form-group { margin-bottom: 18px; }
+
+    label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #555;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      height: 50px;
+      border-radius: 10px;
+      border: 1.5px solid #DDDDDD;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      color: #111;
+      background: #fff;
+      padding: 0 14px;
+      outline: none;
+      appearance: none;
+      transition: border-color 0.18s, box-shadow 0.18s;
+    }
+    textarea { height: auto; padding: 12px 14px; resize: vertical; }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--red);
+      box-shadow: 0 0 0 3px rgba(200,32,42,0.1);
+    }
+    input.error, select.error, textarea.error { border-color: var(--red); }
+
+    .select-wrap { position: relative; }
+    .select-wrap::after {
+      content: '';
+      position: absolute;
+      right: 14px; top: 50%;
+      transform: translateY(-50%);
+      border: 5px solid transparent;
+      border-top-color: #888;
+      border-bottom: none;
+      pointer-events: none;
+    }
+
+    .field-error {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      color: var(--red);
+      margin-top: 4px;
+      display: none;
+    }
+    .field-error.show { display: block; }
+
+    .submit-btn {
+      width: 100%;
+      height: 54px;
+      background: var(--red);
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      margin-top: 24px;
+      transition: background 0.18s;
+    }
+    .submit-btn:hover:not(:disabled) { background: var(--red-dark); }
+    .submit-btn:disabled { background: #888; cursor: not-allowed; }
+
+    .submit-error {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      color: var(--red);
+      text-align: center;
+      margin-top: 14px;
+      display: none;
+      line-height: 1.5;
+    }
+    .submit-error.show { display: block; }
+    .submit-error a { color: var(--red); font-weight: 600; }
+
+    /* Success */
+    .success-card { text-align: center; padding: 48px 24px; display: none; }
+    .success-card.show { display: block; }
+
+    .checkmark-circle {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: rgba(200,32,42,0.1);
+      border: 2px solid rgba(200,32,42,0.3);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+    }
+
+    .success-card h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px; font-weight: 700; color: #111; margin-bottom: 10px;
+    }
+    .success-card p {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px; color: #888; margin-bottom: 24px; line-height: 1.6;
+    }
+    .success-card a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px; font-weight: 600; color: var(--red); text-decoration: none;
+    }
+
+    @media (max-width: 600px) {
+      .contact-section { padding: 40px 1.25rem; }
+      .contact-inner { gap: 36px; }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="contact-section" id="contact">
+    <div class="contact-inner">
+
+      <!-- Left: info -->
+      <div class="contact-info">
+        <span class="section-label">Get In Touch</span>
+        <h2>Let's Talk Real Estate.</h2>
+        <p>Ready to buy or just explore your options? Fill out the form and Brisa will respond within 24 hours.</p>
+        <a class="contact-detail" href="mailto:brisasellsaz@gmail.com">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/>
+          </svg>
+          brisasellsaz@gmail.com
+        </a>
+        <a class="contact-detail" href="https://www.instagram.com/brisasellsaz/" target="_blank" rel="noopener noreferrer">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+          </svg>
+          @brisasellsaz
+        </a>
+        <div class="accent-bar"></div>
+      </div>
+
+      <!-- Right: form card -->
+      <div class="form-card">
+
+        <!-- Success state -->
+        <div class="success-card" id="successCard">
+          <div class="checkmark-circle">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#C8202A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </div>
+          <h2>Message Received!</h2>
+          <p id="successMsg">Thanks! Brisa will be in touch shortly.</p>
+          <a href="https://www.instagram.com/brisasellsaz/" target="_blank" rel="noopener noreferrer">Follow @brisasellsaz →</a>
+        </div>
+
+        <!-- Form -->
+        <form id="contactForm" novalidate>
+
+          <!-- Name -->
+          <div class="form-row">
+            <div>
+              <label for="firstName">First Name</label>
+              <input id="firstName" name="firstName" type="text" placeholder="Jane" />
+              <span class="field-error" id="err-firstName">First name is required.</span>
+            </div>
+            <div>
+              <label for="lastName">Last Name</label>
+              <input id="lastName" name="lastName" type="text" placeholder="Smith" />
+              <span class="field-error" id="err-lastName">Last name is required.</span>
+            </div>
+          </div>
+
+          <!-- Phone + Email -->
+          <div class="form-row">
+            <div>
+              <label for="phone">Phone Number</label>
+              <input id="phone" name="phone" type="tel" placeholder="(480) 555-0123" />
+              <span class="field-error" id="err-phone">Phone number is required.</span>
+            </div>
+            <div>
+              <label for="email">Email Address</label>
+              <input id="email" name="email" type="email" placeholder="jane@email.com" />
+              <span class="field-error" id="err-email">Valid email is required.</span>
+            </div>
+          </div>
+
+          <!-- Credit Score + Residency -->
+          <div class="form-row">
+            <div>
+              <label for="creditScore">Credit Score Range</label>
+              <div class="select-wrap">
+                <select id="creditScore" name="creditScore">
+                  <option value="">Select range...</option>
+                  <option value="Under 580">Under 580</option>
+                  <option value="580–620">580–620</option>
+                  <option value="620–660">620–660</option>
+                  <option value="660–700">660–700</option>
+                  <option value="700+">700+</option>
+                </select>
+              </div>
+              <span class="field-error" id="err-creditScore">Please select a range.</span>
+            </div>
+            <div>
+              <label for="residencyStatus">Residency Status</label>
+              <div class="select-wrap">
+                <select id="residencyStatus" name="residencyStatus">
+                  <option value="">Select status...</option>
+                  <option value="Citizen / Resident">Citizen / Resident</option>
+                  <option value="DACA / Permit">DACA / Permit</option>
+                  <option value="ITIN">ITIN</option>
+                </select>
+              </div>
+              <span class="field-error" id="err-residencyStatus">Please select a status.</span>
+            </div>
+          </div>
+
+          <!-- Salary + Debts -->
+          <div class="form-row">
+            <div>
+              <label for="yearlySalary">Yearly Salary Estimate</label>
+              <input id="yearlySalary" name="yearlySalary" type="text" placeholder="e.g. $55,000" />
+              <span class="field-error" id="err-yearlySalary">Yearly salary is required.</span>
+            </div>
+            <div>
+              <label for="monthlyDebts">Monthly Debts (Cards &amp; Car only)</label>
+              <input id="monthlyDebts" name="monthlyDebts" type="text" placeholder="e.g. $450" />
+              <span class="field-error" id="err-monthlyDebts">Monthly debts are required.</span>
+            </div>
+          </div>
+
+          <!-- Message -->
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="4" placeholder="Tell me a little about what you're looking for..."></textarea>
+            <span class="field-error" id="err-message">Message is required.</span>
+          </div>
+
+          <button type="submit" class="submit-btn" id="submitBtn">Send Message</button>
+
+          <div class="submit-error" id="submitError">
+            Something went wrong. Please try again or
+            <a href="mailto:brisasellsaz@gmail.com">email directly →</a>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const WEB3FORMS_KEY = 'd26110d1-9c59-40fe-9369-d4e7705f07ea'
+
+    function getVal(id) { return document.getElementById(id).value.trim() }
+
+    function setError(id, show) {
+      const el  = document.getElementById(id)
+      const err = document.getElementById('err-' + id)
+      if (!el || !err) return
+      if (show) { el.classList.add('error'); err.classList.add('show') }
+      else       { el.classList.remove('error'); err.classList.remove('show') }
+    }
+
+    function validate() {
+      const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      const fields = {
+        firstName:       !getVal('firstName'),
+        lastName:        !getVal('lastName'),
+        phone:           !getVal('phone'),
+        email:           !getVal('email') || !emailRe.test(getVal('email')),
+        creditScore:     !getVal('creditScore'),
+        residencyStatus: !getVal('residencyStatus'),
+        yearlySalary:    !getVal('yearlySalary'),
+        monthlyDebts:    !getVal('monthlyDebts'),
+        message:         !getVal('message'),
+      }
+      Object.entries(fields).forEach(([k, v]) => setError(k, v))
+      return !Object.values(fields).some(Boolean)
+    }
+
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
+      e.preventDefault()
+      if (!validate()) return
+
+      const btn    = document.getElementById('submitBtn')
+      const errBox = document.getElementById('submitError')
+      btn.disabled = true
+      btn.textContent = 'Sending...'
+      errBox.classList.remove('show')
+
+      const firstName = getVal('firstName')
+      const lastName  = getVal('lastName')
+
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            access_key:       WEB3FORMS_KEY,
+            name:             firstName + ' ' + lastName,
+            email:            getVal('email'),
+            phone:            getVal('phone'),
+            credit_score:     getVal('creditScore'),
+            residency_status: getVal('residencyStatus'),
+            yearly_salary:    getVal('yearlySalary'),
+            monthly_debts:    getVal('monthlyDebts'),
+            message:          getVal('message'),
+            subject:          'Consultation Form from ' + firstName + ' ' + lastName,
+          }),
+        })
+        const data = await res.json()
+        if (!data.success) throw new Error()
+
+        document.getElementById('successMsg').textContent =
+          'Thanks ' + firstName + '! Brisa will be in touch shortly.'
+        document.getElementById('successCard').classList.add('show')
+        document.getElementById('contactForm').style.display = 'none'
+      } catch {
+        errBox.classList.add('show')
+        btn.disabled = false
+        btn.textContent = 'Send Message'
+      }
+    })
+
+    // Tell Wix the iframe height so it auto-resizes
+    function notifyHeight() {
+      window.parent.postMessage({ type: 'wix-height', height: document.body.scrollHeight }, '*')
+    }
+    window.addEventListener('load', notifyHeight)
+    window.addEventListener('resize', notifyHeight)
+    new MutationObserver(notifyHeight).observe(document.body, { childList: true, subtree: true })
+  </script>
+
+</body>
+</html>
