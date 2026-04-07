@@ -6,9 +6,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <style>
-    /* ── Reset ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
@@ -18,16 +16,24 @@
       background: #fff;
     }
 
-    /* ── Variables ── */
     :root {
       --red: #C8202A;
       --red-dark: #a01820;
-      --black: #111111;
-      --dark: #1A1A1A;
-      --surface: #F9F8F6;
     }
 
-    /* ── Utilities ── */
+    /* ── Contact section ── */
+    .contact-section { background: #fff; padding: 60px 2rem; }
+
+    .contact-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 56px;
+      align-items: start;
+    }
+
+    /* Left info panel */
     .section-label {
       font-family: 'DM Sans', sans-serif;
       font-size: 11px;
@@ -39,224 +45,6 @@
       margin-bottom: 12px;
     }
 
-    /* ════════════════════════════════
-       HERO
-    ════════════════════════════════ */
-    .hero {
-      background: #1A1A1A;
-      padding: 90px 2rem 80px;
-      text-align: center;
-    }
-
-    .hero-eyebrow {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 11px;
-      color: var(--red);
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      font-weight: 600;
-      margin-bottom: 20px;
-    }
-
-    .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(36px, 6vw, 62px);
-      color: #fff;
-      font-weight: 700;
-      line-height: 1.1;
-      margin-bottom: 20px;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: rgba(200,32,42,0.12);
-      border: 1px solid rgba(200,32,42,0.3);
-      border-radius: 4px;
-      padding: 6px 16px;
-      margin-bottom: 28px;
-    }
-
-    .hero-badge .badge-realtor {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      color: var(--red);
-      font-weight: 600;
-      letter-spacing: 0.06em;
-    }
-
-    .hero-badge .badge-pipe {
-      color: rgba(255,255,255,0.2);
-      font-size: 13px;
-    }
-
-    .hero-badge .badge-group {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      color: #888;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-    }
-
-    .hero-bio {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 17px;
-      color: #AAAAAA;
-      max-width: 500px;
-      margin: 0 auto 36px;
-      line-height: 1.65;
-    }
-
-    .hero-cta {
-      display: inline-block;
-      background: var(--red);
-      color: #fff;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      border-radius: 6px;
-      padding: 16px 44px;
-      border: none;
-      cursor: pointer;
-      margin-bottom: 32px;
-      text-decoration: none;
-      transition: background 0.18s;
-    }
-    .hero-cta:hover { background: var(--red-dark); }
-
-    .hero-socials {
-      display: flex;
-      justify-content: center;
-      gap: 14px;
-    }
-
-    .social-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.15);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: rgba(255,255,255,0.6);
-      text-decoration: none;
-      transition: border-color 0.18s, color 0.18s;
-    }
-    .social-icon:hover {
-      border-color: var(--red);
-      color: var(--red);
-    }
-    .social-icon svg { display: block; }
-
-    /* ════════════════════════════════
-       INSTAGRAM
-    ════════════════════════════════ */
-    .ig-section {
-      background: #F9F8F6;
-      padding: 80px 2rem;
-    }
-
-    .ig-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .ig-header {
-      text-align: center;
-      margin-bottom: 48px;
-    }
-
-    .ig-header h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(26px, 4vw, 40px);
-      font-weight: 700;
-      color: #111;
-      margin-bottom: 10px;
-    }
-
-    .ig-header p {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 15px;
-      color: #888;
-      max-width: 480px;
-      margin: 0 auto;
-      line-height: 1.6;
-    }
-
-    .ig-card {
-      background: #fff;
-      border-radius: 16px;
-      border: 1px solid #E8E8E8;
-      padding: 56px 40px;
-      max-width: 480px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .ig-icon-circle {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 20px;
-    }
-
-    .ig-card h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 22px;
-      font-weight: 700;
-      color: #111;
-      margin-bottom: 10px;
-    }
-
-    .ig-card p {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      color: #888;
-      line-height: 1.65;
-      margin-bottom: 28px;
-    }
-
-    .ig-btn {
-      display: inline-block;
-      background: var(--red);
-      color: #fff;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      border-radius: 6px;
-      padding: 14px 32px;
-      text-decoration: none;
-      transition: background 0.18s;
-    }
-    .ig-btn:hover { background: var(--red-dark); }
-
-    /* ════════════════════════════════
-       CONTACT FORM
-    ════════════════════════════════ */
-    .contact-section {
-      background: #fff;
-      padding: 90px 2rem;
-    }
-
-    .contact-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 64px;
-      align-items: start;
-    }
-
-    /* Left */
     .contact-info h2 {
       font-family: 'Playfair Display', serif;
       font-size: clamp(28px, 4vw, 44px);
@@ -288,17 +76,10 @@
       transition: color 0.18s;
     }
     .contact-detail:hover { color: var(--red); }
-    .contact-detail svg { flex-shrink: 0; }
 
-    .accent-bar {
-      width: 48px;
-      height: 3px;
-      background: var(--red);
-      border-radius: 2px;
-      margin-top: 8px;
-    }
+    .accent-bar { width: 48px; height: 3px; background: var(--red); border-radius: 2px; margin-top: 8px; }
 
-    /* Right — form card */
+    /* Form card */
     .form-card {
       background: #fff;
       border-radius: 16px;
@@ -315,7 +96,6 @@
     }
 
     .form-group { margin-bottom: 18px; }
-    .form-group:last-of-type { margin-bottom: 0; }
 
     label {
       font-family: 'DM Sans', sans-serif;
@@ -342,25 +122,18 @@
       appearance: none;
       transition: border-color 0.18s, box-shadow 0.18s;
     }
-    textarea {
-      height: auto;
-      padding: 12px 14px;
-      resize: vertical;
-    }
+    textarea { height: auto; padding: 12px 14px; resize: vertical; }
     input:focus, select:focus, textarea:focus {
       border-color: var(--red);
       box-shadow: 0 0 0 3px rgba(200,32,42,0.1);
     }
-    input.error, select.error, textarea.error {
-      border-color: var(--red);
-    }
+    input.error, select.error, textarea.error { border-color: var(--red); }
 
     .select-wrap { position: relative; }
     .select-wrap::after {
       content: '';
       position: absolute;
-      right: 14px;
-      top: 50%;
+      right: 14px; top: 50%;
       transform: translateY(-50%);
       border: 5px solid transparent;
       border-top-color: #888;
@@ -408,127 +181,39 @@
     .submit-error.show { display: block; }
     .submit-error a { color: var(--red); font-weight: 600; }
 
-    /* Success state */
-    .success-card {
-      text-align: center;
-      padding: 48px 24px;
-      display: none;
-    }
+    /* Success */
+    .success-card { text-align: center; padding: 48px 24px; display: none; }
     .success-card.show { display: block; }
-    .form-card.sent .success-card { display: block; }
-    .form-card.sent form { display: none; }
 
     .checkmark-circle {
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
+      width: 72px; height: 72px; border-radius: 50%;
       background: rgba(200,32,42,0.1);
       border: 2px solid rgba(200,32,42,0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       margin: 0 auto 20px;
     }
 
     .success-card h2 {
       font-family: 'Playfair Display', serif;
-      font-size: 26px;
-      font-weight: 700;
-      color: #111;
-      margin-bottom: 10px;
+      font-size: 26px; font-weight: 700; color: #111; margin-bottom: 10px;
     }
-
     .success-card p {
       font-family: 'DM Sans', sans-serif;
-      font-size: 15px;
-      color: #888;
-      margin-bottom: 24px;
-      line-height: 1.6;
+      font-size: 15px; color: #888; margin-bottom: 24px; line-height: 1.6;
     }
-
     .success-card a {
       font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--red);
-      text-decoration: none;
+      font-size: 14px; font-weight: 600; color: var(--red); text-decoration: none;
     }
 
-    /* ── Responsive ── */
     @media (max-width: 600px) {
-      .hero { padding: 60px 1.25rem 60px; }
-      .ig-section, .contact-section { padding: 60px 1.25rem; }
-      .ig-card { padding: 40px 24px; }
-      .contact-inner { gap: 40px; }
+      .contact-section { padding: 40px 1.25rem; }
+      .contact-inner { gap: 36px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ════ HERO ════ -->
-  <section class="hero">
-    <p class="hero-eyebrow">THE RIO GROUP · AZ &amp; ASSOCIATES</p>
-    <h1>Brisa Garcia Roman</h1>
-    <div class="hero-badge">
-      <span class="badge-realtor">REALTOR®</span>
-      <span class="badge-pipe">|</span>
-      <span class="badge-group">THE RIO GROUP</span>
-    </div>
-    <p class="hero-bio">
-      Helping buyers and sellers across the Phoenix Valley find their perfect home —
-      with honesty, strategy, and real results.
-    </p>
-    <a class="hero-cta" href="#contact" onclick="smoothScroll(event,'contact')">Get In Touch</a>
-    <div class="hero-socials">
-      <a class="social-icon" href="https://www.instagram.com/brisasellsaz/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-          <circle cx="12" cy="12" r="4"/>
-          <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
-        </svg>
-      </a>
-      <a class="social-icon" href="mailto:brisasellsaz@gmail.com" aria-label="Email">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="2" y="4" width="20" height="16" rx="2"/>
-          <polyline points="2,4 12,13 22,4"/>
-        </svg>
-      </a>
-    </div>
-  </section>
-
-  <!-- ════ INSTAGRAM ════ -->
-  <section class="ig-section">
-    <div class="ig-inner">
-      <div class="ig-header">
-        <span class="section-label">Follow Along</span>
-        <h2>Latest from @brisasellsaz</h2>
-        <p>Stay up to date with listings, market tips, and behind-the-scenes looks at life in the Phoenix Valley.</p>
-      </div>
-
-      <!--
-        SETUP: Go to behold.so (free), connect @brisasellsaz, paste Widget ID below.
-        Replace the placeholder card below with:
-          <behold-widget feed-id="YOUR_WIDGET_ID"></behold-widget>
-          <script src="https://w.behold.so/widget.js" type="module"></script>
-      -->
-      <div class="ig-card">
-        <div class="ig-icon-circle">
-          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-            <circle cx="12" cy="12" r="4"/>
-            <circle cx="17.5" cy="6.5" r="1" fill="white" stroke="none"/>
-          </svg>
-        </div>
-        <h3>@brisasellsaz</h3>
-        <p>Follow Brisa on Instagram for real estate tips, Phoenix Valley market updates, and new listings.</p>
-        <a class="ig-btn" href="https://www.instagram.com/brisasellsaz/" target="_blank" rel="noopener noreferrer">
-          Follow on Instagram
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ════ CONTACT ════ -->
   <section class="contact-section" id="contact">
     <div class="contact-inner">
 
@@ -536,11 +221,10 @@
       <div class="contact-info">
         <span class="section-label">Get In Touch</span>
         <h2>Let's Talk Real Estate.</h2>
-        <p>Ready to buy, sell, or just explore your options? Fill out the form and Brisa will respond within 24 hours.</p>
+        <p>Ready to buy or just explore your options? Fill out the form and Brisa will respond within 24 hours.</p>
         <a class="contact-detail" href="mailto:brisasellsaz@gmail.com">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="4" width="20" height="16" rx="2"/>
-            <polyline points="2,4 12,13 22,4"/>
+            <rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/>
           </svg>
           brisasellsaz@gmail.com
         </a>
@@ -555,8 +239,8 @@
         <div class="accent-bar"></div>
       </div>
 
-      <!-- Right: form -->
-      <div class="form-card" id="formCard">
+      <!-- Right: form card -->
+      <div class="form-card">
 
         <!-- Success state -->
         <div class="success-card" id="successCard">
@@ -567,13 +251,13 @@
           </div>
           <h2>Message Received!</h2>
           <p id="successMsg">Thanks! Brisa will be in touch shortly.</p>
-          <a href="https://www.instagram.com/brisasellsaz/" target="_blank" rel="noopener noreferrer">
-            Follow @brisasellsaz →
-          </a>
+          <a href="https://www.instagram.com/brisasellsaz/" target="_blank" rel="noopener noreferrer">Follow @brisasellsaz →</a>
         </div>
 
         <!-- Form -->
         <form id="contactForm" novalidate>
+
+          <!-- Name -->
           <div class="form-row">
             <div>
               <label for="firstName">First Name</label>
@@ -587,6 +271,7 @@
             </div>
           </div>
 
+          <!-- Phone + Email -->
           <div class="form-row">
             <div>
               <label for="phone">Phone Number</label>
@@ -600,20 +285,51 @@
             </div>
           </div>
 
-          <div class="form-group">
-            <label for="intent">Are you buying or selling?</label>
-            <div class="select-wrap">
-              <select id="intent" name="intent">
-                <option value="">Select one...</option>
-                <option value="Buying a Home">Buying a Home</option>
-                <option value="Selling a Home">Selling a Home</option>
-                <option value="Buying & Selling">Buying &amp; Selling</option>
-                <option value="Just Exploring">Just Exploring</option>
-              </select>
+          <!-- Credit Score + Residency -->
+          <div class="form-row">
+            <div>
+              <label for="creditScore">Credit Score Range</label>
+              <div class="select-wrap">
+                <select id="creditScore" name="creditScore">
+                  <option value="">Select range...</option>
+                  <option value="Under 580">Under 580</option>
+                  <option value="580–620">580–620</option>
+                  <option value="620–660">620–660</option>
+                  <option value="660–700">660–700</option>
+                  <option value="700+">700+</option>
+                </select>
+              </div>
+              <span class="field-error" id="err-creditScore">Please select a range.</span>
             </div>
-            <span class="field-error" id="err-intent">Please select an option.</span>
+            <div>
+              <label for="residencyStatus">Residency Status</label>
+              <div class="select-wrap">
+                <select id="residencyStatus" name="residencyStatus">
+                  <option value="">Select status...</option>
+                  <option value="Citizen / Resident">Citizen / Resident</option>
+                  <option value="DACA / Permit">DACA / Permit</option>
+                  <option value="ITIN">ITIN</option>
+                </select>
+              </div>
+              <span class="field-error" id="err-residencyStatus">Please select a status.</span>
+            </div>
           </div>
 
+          <!-- Salary + Debts -->
+          <div class="form-row">
+            <div>
+              <label for="yearlySalary">Yearly Salary Estimate</label>
+              <input id="yearlySalary" name="yearlySalary" type="text" placeholder="e.g. $55,000" />
+              <span class="field-error" id="err-yearlySalary">Yearly salary is required.</span>
+            </div>
+            <div>
+              <label for="monthlyDebts">Monthly Debts (Cards &amp; Car only)</label>
+              <input id="monthlyDebts" name="monthlyDebts" type="text" placeholder="e.g. $450" />
+              <span class="field-error" id="err-monthlyDebts">Monthly debts are required.</span>
+            </div>
+          </div>
+
+          <!-- Message -->
           <div class="form-group">
             <label for="message">Message</label>
             <textarea id="message" name="message" rows="4" placeholder="Tell me a little about what you're looking for..."></textarea>
@@ -626,79 +342,75 @@
             Something went wrong. Please try again or
             <a href="mailto:brisasellsaz@gmail.com">email directly →</a>
           </div>
+
         </form>
       </div>
     </div>
   </section>
 
   <script>
-    // ── EmailJS Setup ──────────────────────────────────────────────────
-    // 1. Go to emailjs.com → create free account
-    // 2. Add a Gmail service connected to brisasellsaz@gmail.com
-    // 3. Create a template with: {{from_name}}, {{from_email}}, {{phone}}, {{intent}}, {{message}}
-    // 4. Replace the three values below:
-    const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID'
-    const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID'
-    const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY'
-    // ──────────────────────────────────────────────────────────────────
-
-    emailjs.init(EMAILJS_PUBLIC_KEY)
-
-    function smoothScroll(e, id) {
-      e.preventDefault()
-      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
-    }
+    const WEB3FORMS_KEY = 'd26110d1-9c59-40fe-9369-d4e7705f07ea'
 
     function getVal(id) { return document.getElementById(id).value.trim() }
+
     function setError(id, show) {
-      const el = document.getElementById(id)
+      const el  = document.getElementById(id)
       const err = document.getElementById('err-' + id)
+      if (!el || !err) return
       if (show) { el.classList.add('error'); err.classList.add('show') }
       else       { el.classList.remove('error'); err.classList.remove('show') }
     }
 
     function validate() {
-      const firstName = getVal('firstName')
-      const lastName  = getVal('lastName')
-      const phone     = getVal('phone')
-      const email     = getVal('email')
-      const intent    = getVal('intent')
-      const message   = getVal('message')
-      const emailRe   = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-      let ok = true
-
-      setError('firstName', !firstName)
-      setError('lastName',  !lastName)
-      setError('phone',     !phone)
-      setError('email',     !email || !emailRe.test(email))
-      setError('intent',    !intent)
-      setError('message',   !message)
-
-      if (!firstName || !lastName || !phone || !email || !emailRe.test(email) || !intent || !message) ok = false
-      return ok
+      const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      const fields = {
+        firstName:       !getVal('firstName'),
+        lastName:        !getVal('lastName'),
+        phone:           !getVal('phone'),
+        email:           !getVal('email') || !emailRe.test(getVal('email')),
+        creditScore:     !getVal('creditScore'),
+        residencyStatus: !getVal('residencyStatus'),
+        yearlySalary:    !getVal('yearlySalary'),
+        monthlyDebts:    !getVal('monthlyDebts'),
+        message:         !getVal('message'),
+      }
+      Object.entries(fields).forEach(([k, v]) => setError(k, v))
+      return !Object.values(fields).some(Boolean)
     }
 
     document.getElementById('contactForm').addEventListener('submit', async function(e) {
       e.preventDefault()
       if (!validate()) return
 
-      const btn = document.getElementById('submitBtn')
+      const btn    = document.getElementById('submitBtn')
       const errBox = document.getElementById('submitError')
       btn.disabled = true
       btn.textContent = 'Sending...'
       errBox.classList.remove('show')
 
       const firstName = getVal('firstName')
+      const lastName  = getVal('lastName')
 
       try {
-        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-          from_name:  firstName + ' ' + getVal('lastName'),
-          from_email: getVal('email'),
-          phone:      getVal('phone'),
-          intent:     getVal('intent'),
-          message:    getVal('message'),
-          to_email:   'brisasellsaz@gmail.com'
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            access_key:       WEB3FORMS_KEY,
+            name:             firstName + ' ' + lastName,
+            email:            getVal('email'),
+            phone:            getVal('phone'),
+            credit_score:     getVal('creditScore'),
+            residency_status: getVal('residencyStatus'),
+            yearly_salary:    getVal('yearlySalary'),
+            monthly_debts:    getVal('monthlyDebts'),
+            message:          getVal('message'),
+            subject:          'Consultation Form from ' + firstName + ' ' + lastName,
+          }),
         })
+        const data = await res.json()
+        if (!data.success) throw new Error()
+
         document.getElementById('successMsg').textContent =
           'Thanks ' + firstName + '! Brisa will be in touch shortly.'
         document.getElementById('successCard').classList.add('show')
@@ -710,10 +422,9 @@
       }
     })
 
-    // Auto-resize iFrame height for Wix
+    // Tell Wix the iframe height so it auto-resizes
     function notifyHeight() {
-      const h = document.body.scrollHeight
-      window.parent.postMessage({ type: 'wix-height', height: h }, '*')
+      window.parent.postMessage({ type: 'wix-height', height: document.body.scrollHeight }, '*')
     }
     window.addEventListener('load', notifyHeight)
     window.addEventListener('resize', notifyHeight)
