@@ -2,24 +2,8 @@
 
 import { useState, CSSProperties } from 'react'
 
-// SETUP: Go to emailjs.com (free), create a service connected to brisasellsaz@gmail.com
-// Create a template using: {{from_name}}, {{from_email}}, {{phone}}, {{intent}}, {{message}}
-// Paste your IDs below:
-const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID'
-const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID'
-const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY'
-
-// ALTERNATIVE — Formspree (no backend needed):
-// 1. Go to formspree.io, create a free account
-// 2. Create a new form, set the recipient to brisasellsaz@gmail.com
-// 3. Copy the form endpoint (e.g., https://formspree.io/f/YOUR_FORM_ID)
-// 4. Replace the emailjs.send() call below with:
-//    const res = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
-//      method: 'POST',
-//      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-//      body: JSON.stringify({ name: firstName + ' ' + lastName, email, phone, intent, message }),
-//    })
-//    if (!res.ok) throw new Error('Formspree error')
+// Web3Forms — submissions go directly to brisasellsaz@gmail.com
+const WEB3FORMS_KEY = 'd26110d1-9c59-40fe-9369-d4e7705f07ea'
 
 interface FormData {
   firstName: string
@@ -128,20 +112,21 @@ export default function ContactForm() {
     setSending(true)
     setSubmitError('')
     try {
-      const emailjs = (await import('@emailjs/browser')).default
-      await emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        {
-          from_name: `${form.firstName} ${form.lastName}`,
-          from_email: form.email,
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          name: `${form.firstName} ${form.lastName}`,
+          email: form.email,
           phone: form.phone,
           intent: form.intent,
           message: form.message,
-          to_email: 'brisasellsaz@gmail.com',
-        },
-        EMAILJS_PUBLIC_KEY
-      )
+          subject: `New inquiry from ${form.firstName} ${form.lastName}`,
+        }),
+      })
+      const data = await res.json()
+      if (!data.success) throw new Error('Web3Forms error')
       setSent(true)
     } catch {
       setSubmitError('Something went wrong. Please try again or email directly.')
