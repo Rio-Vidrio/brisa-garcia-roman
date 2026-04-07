@@ -122,7 +122,7 @@ export default function ContactForm() {
           phone: form.phone,
           intent: form.intent,
           message: form.message,
-          subject: `New inquiry from ${form.firstName} ${form.lastName}`,
+          subject: `Consultation Form from ${form.firstName} ${form.lastName}`,
         }),
       })
       const data = await res.json()
