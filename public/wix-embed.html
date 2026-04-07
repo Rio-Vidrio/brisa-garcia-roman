@@ -406,6 +406,7 @@
             monthly_debts:    getVal('monthlyDebts'),
             message:          getVal('message'),
             subject:          'Consultation Form from ' + firstName + ' ' + lastName,
+            cc:               'brisa.roman@followupboss.me',
           }),
         })
         const data = await res.json()
